@@ -5,6 +5,12 @@ const handleWebHook = require('../controller/webhooks');
 
 router.post('/send', sendEmail.sendEmail);
 
-router.post('/test', handleWebHook.handleElasticWebhook);
+
+// 👇 Accept GET and POST for Elastic's test
+router.route('/test')
+  .get((req, res) => res.status(200).send('✅ GET Webhook Test OK'))
+  .post(handleWebHook.handleElasticWebhook);
+
+module.exports = router;
 
 module.exports = router;
